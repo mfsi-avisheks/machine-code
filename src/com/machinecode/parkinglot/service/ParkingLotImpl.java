@@ -2,17 +2,13 @@ package com.machinecode.parkinglot.service;
 
 import com.machinecode.parkinglot.dto.CreateParkingLotRequest;
 import com.machinecode.parkinglot.dto.DisplayRequest;
-import com.machinecode.parkinglot.entity.ParkingSlot;
 import com.machinecode.parkinglot.repository.ParkingLotRepository;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class ParkingLotImpl implements IParkingLot {
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
-
     private ParkingLotRepository parkingLotRepository = new ParkingLotRepository();
     private com.machinecode.parkinglot.entity.ParkingLot parkingLot;
+    private DisplayFactory displayFactory = new DisplayFactory();
 
     @Override
     public void createParkingLot(CreateParkingLotRequest request) {
@@ -25,16 +21,7 @@ public class ParkingLotImpl implements IParkingLot {
 
     @Override
     public void display(DisplayRequest request) {
-        parkingLot.getParkingFloorList()
-            .forEach(parkingFloor -> {
-                String freeSlots = parkingFloor.getParkingSlotList().stream()
-                    .filter(slot -> !slot.isOccupied() && slot.getVehicleType()
-                        .equals(request.getVehicleType()))
-                    .map(ParkingSlot::getSlotId)
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(","));
-                System.out.printf("Free slots for %s on Floor %d: %s%n", request.getVehicleType(),
-                    parkingFloor.getFloorId(), freeSlots);
-            });
+        this.displayFactory.getDisplayService(request.getDisplayType())
+            .display(this.parkingLot, request);
     }
 }

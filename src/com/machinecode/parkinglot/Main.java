@@ -19,7 +19,17 @@ public class Main {
         ParkingLotImpl parkingLot = new ParkingLotImpl();
         parkingLot.createParkingLot(new CreateParkingLotRequest("PR1234", 2, 6));
 
+        parkingLot.display(new DisplayRequest(DisplayType.of("free_count"), VehicleType.TRUCK));
+        parkingLot.display(new DisplayRequest(DisplayType.of("free_count"), VehicleType.BIKE));
+        parkingLot.display(new DisplayRequest(DisplayType.of("free_count"), VehicleType.CAR));
+
+        parkingLot.display(new DisplayRequest(DisplayType.of("free_slots"), VehicleType.TRUCK));
+        parkingLot.display(new DisplayRequest(DisplayType.of("free_slots"), VehicleType.BIKE));
         parkingLot.display(new DisplayRequest(DisplayType.of("free_slots"), VehicleType.CAR));
+
+        parkingLot.display(new DisplayRequest(DisplayType.of("occupied_slots"), VehicleType.TRUCK));
+        parkingLot.display(new DisplayRequest(DisplayType.of("occupied_slots"), VehicleType.BIKE));
+        parkingLot.display(new DisplayRequest(DisplayType.of("occupied_slots"), VehicleType.CAR));
     }
 
 }

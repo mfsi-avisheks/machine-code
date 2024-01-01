@@ -1,19 +1,22 @@
 package com.machinecode.parkinglot.service;
 
 import com.machinecode.parkinglot.enums.DisplayType;
+import com.machinecode.parkinglot.service.display.IDisplayService;
+import com.machinecode.parkinglot.service.display.impl.FreeCountDisplayServiceImpl;
+import com.machinecode.parkinglot.service.display.impl.FreeSlotDisplayServiceImpl;
+import com.machinecode.parkinglot.service.display.impl.OccupiedSlotDisplayServiceImpl;
 import java.util.Set;
 
 public class DisplayFactory {
-    private Set<IDisplayService> displayServices;
 
     public IDisplayService getDisplayService(DisplayType displayType) {
         switch (displayType) {
-//            case "free_count":
-//                return new FreeCountDisplay();
+            case FREE_COUNT:
+                return new FreeCountDisplayServiceImpl();
             case FREE_SLOTS:
-                return new FreeSlotDisplayService();
-//            case "occupied_slots":
-//                return new OccupiedSlotsDisplay();
+                return new FreeSlotDisplayServiceImpl();
+            case OCCUPIED_SLOTS:
+                return new OccupiedSlotDisplayServiceImpl();
             default:
                 throw new IllegalArgumentException("Invalid display type: " + displayType);
         }
