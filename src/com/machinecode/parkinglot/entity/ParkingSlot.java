@@ -10,7 +10,8 @@ public class ParkingSlot {
     private VehicleType vehicleType;
     private Vehicle vehicle;
 
-    public ParkingSlot(){}
+    public ParkingSlot() {
+    }
 
     public ParkingSlot(int slotId, String ticket, boolean isOccupied,
         VehicleType vehicleType) {

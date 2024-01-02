@@ -20,10 +20,12 @@ public enum DisplayType {
     private static final HashMap<String, DisplayType> map = new HashMap<>(values().length, 1);
 
     static {
-        for (DisplayType c : values()) map.put(c.display, c);
+        for (DisplayType c : values()) {
+            map.put(c.display, c);
+        }
     }
 
-    public static DisplayType of(String name){
+    public static DisplayType of(String name) {
         return map.get(name);
     }
 }

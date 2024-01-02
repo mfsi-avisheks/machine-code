@@ -5,7 +5,6 @@ import com.machinecode.parkinglot.service.display.IDisplayService;
 import com.machinecode.parkinglot.service.display.impl.FreeCountDisplayServiceImpl;
 import com.machinecode.parkinglot.service.display.impl.FreeSlotDisplayServiceImpl;
 import com.machinecode.parkinglot.service.display.impl.OccupiedSlotDisplayServiceImpl;
-import java.util.Set;
 
 public class DisplayFactory {
 

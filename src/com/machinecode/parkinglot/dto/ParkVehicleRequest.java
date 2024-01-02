@@ -3,6 +3,7 @@ package com.machinecode.parkinglot.dto;
 import com.machinecode.parkinglot.enums.VehicleType;
 
 public class ParkVehicleRequest {
+
     private VehicleType vehicleType;
     private String registrationNo;
     private String color;

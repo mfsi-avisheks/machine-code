@@ -19,17 +19,17 @@ public class ParkingLotRepository {
 
         List<ParkingFloor> parkingFloors = new ArrayList<>();
 
-        for(int floor=1; floor<=noOfFloors; floor++) {
+        for (int floor = 1; floor <= noOfFloors; floor++) {
             List<ParkingSlot> parkingSlots = new ArrayList<>();
             String ticket = String.format("%s_%s_%s", lotId, floor, 1);
             parkingSlots.add(new ParkingSlot(1, ticket, false, VehicleType.TRUCK));
 
-            for(int slot=2; slot<=3; slot++) {
+            for (int slot = 2; slot <= 3; slot++) {
                 ticket = String.format("%s_%s_%s", lotId, floor, slot);
                 parkingSlots.add(new ParkingSlot(slot, ticket, false, VehicleType.BIKE));
             }
 
-            for(int slot=4; slot<=noOfSlotsPerFloor; slot++) {
+            for (int slot = 4; slot <= noOfSlotsPerFloor; slot++) {
                 ticket = String.format("%s_%s_%s", lotId, floor, slot);
                 parkingSlots.add(new ParkingSlot(slot, ticket, false, VehicleType.CAR));
             }

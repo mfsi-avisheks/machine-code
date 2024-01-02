@@ -1,6 +1,7 @@
 package com.machinecode.parkinglot.dto;
 
 public class CreateParkingLotRequest {
+
     private String lotId;
     private int noOfFloors;
     private int noOfSlotsPerFloor;

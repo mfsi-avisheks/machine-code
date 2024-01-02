@@ -4,6 +4,7 @@ import com.machinecode.parkinglot.enums.DisplayType;
 import com.machinecode.parkinglot.enums.VehicleType;
 
 public class DisplayRequest {
+
     private DisplayType displayType;
     private VehicleType vehicleType;
 
