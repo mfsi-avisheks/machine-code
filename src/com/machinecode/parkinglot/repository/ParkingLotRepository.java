@@ -62,4 +62,8 @@ public class ParkingLotRepository {
                 return parkingSlot;
             });
     }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
 }
