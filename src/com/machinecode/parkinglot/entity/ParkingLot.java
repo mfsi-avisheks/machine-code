@@ -9,6 +9,8 @@ public class ParkingLot {
     private int noOfSlotsPerFloor;
     private List<ParkingFloor> parkingFloorList;
 
+    public ParkingLot(){}
+
     public ParkingLot(String lotId, int noOfFloors, int noOfSlotsPerFloor,
         List<ParkingFloor> parkingFloorList) {
         this.lotId = lotId;

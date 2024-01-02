@@ -2,7 +2,11 @@ package com.machinecode.parkinglot.service;
 
 import com.machinecode.parkinglot.dto.CreateParkingLotRequest;
 import com.machinecode.parkinglot.dto.DisplayRequest;
+import com.machinecode.parkinglot.dto.ParkVehicleRequest;
+import com.machinecode.parkinglot.dto.UnParkVehicleRequest;
+import com.machinecode.parkinglot.entity.ParkingSlot;
 import com.machinecode.parkinglot.repository.ParkingLotRepository;
+import java.util.Optional;
 
 public class ParkingLotImpl implements IParkingLot {
 
@@ -23,5 +27,27 @@ public class ParkingLotImpl implements IParkingLot {
     public void display(DisplayRequest request) {
         this.displayFactory.getDisplayService(request.getDisplayType())
             .display(this.parkingLot, request);
+    }
+
+    @Override
+    public void parkVehicle(ParkVehicleRequest parkVehicleRequest) {
+        this.findFirstAvailableSlot(parkVehicleRequest);
+    }
+
+    private void findFirstAvailableSlot(ParkVehicleRequest parkVehicleRequest) {
+        Optional<ParkingSlot> parkingSlot = parkingLotRepository.findFirstAvailableSlot(
+            parkVehicleRequest);
+
+        if (parkingSlot.isPresent()) {
+            ParkingSlot slot = parkingSlot.get();
+            System.out.printf("Parked vehicle. Ticket ID: %s%n",  slot.getTicket());
+        } else {
+            System.out.printf("No available slots for the specified vehicle type.%n");
+        }
+    }
+
+    @Override
+    public void unParkVehicle(UnParkVehicleRequest displayFreeSlotRequest) {
+
     }
 }
