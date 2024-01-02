@@ -1,6 +1,7 @@
 package com.machinecode.parkinglot.repository;
 
 import com.machinecode.parkinglot.dto.ParkVehicleRequest;
+import com.machinecode.parkinglot.dto.UnParkVehicleRequest;
 import com.machinecode.parkinglot.entity.ParkingFloor;
 import com.machinecode.parkinglot.entity.ParkingLot;
 import com.machinecode.parkinglot.entity.ParkingSlot;
@@ -60,6 +61,24 @@ public class ParkingLotRepository {
                 parkingSlot.setOccupied(true);
                 parkingSlot.setVehicle(vehicle);
                 return parkingSlot;
+            });
+    }
+
+    public Optional<Vehicle> findAndUnParkVehicle(UnParkVehicleRequest unParkVehicleRequest) {
+
+        return parkingLot.getParkingFloorList()
+            .stream()
+            .flatMap(parkingFloor -> parkingFloor.getParkingSlotList().stream())
+            .filter(parkingSlot -> parkingSlot.getTicket()
+                .equals(unParkVehicleRequest.getTicket()))
+            .findFirst()
+            .map(parkingSlot -> {
+                Vehicle vehicle = parkingSlot.getVehicle();
+
+                parkingSlot.setOccupied(false);
+                parkingSlot.setVehicle(null);
+
+                return vehicle;
             });
     }
 

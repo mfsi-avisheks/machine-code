@@ -6,6 +6,7 @@ import com.machinecode.parkinglot.dto.ParkVehicleRequest;
 import com.machinecode.parkinglot.dto.UnParkVehicleRequest;
 import com.machinecode.parkinglot.entity.ParkingLot;
 import com.machinecode.parkinglot.entity.ParkingSlot;
+import com.machinecode.parkinglot.entity.Vehicle;
 import com.machinecode.parkinglot.repository.ParkingLotRepository;
 import java.util.Optional;
 
@@ -41,14 +42,23 @@ public class ParkingLotImpl implements IParkingLot {
 
         if (parkingSlot.isPresent()) {
             ParkingSlot slot = parkingSlot.get();
-            System.out.printf("Parked vehicle. Ticket ID: %s%n",  slot.getTicket());
+            System.out.printf("Parked vehicle. Ticket ID: %s%n", slot.getTicket());
         } else {
-            System.out.printf("No available slots for the specified vehicle type.%n");
+            System.out.printf("Parking Lot Full%n");
         }
     }
 
     @Override
-    public void unParkVehicle(UnParkVehicleRequest displayFreeSlotRequest) {
+    public void unParkVehicle(UnParkVehicleRequest unParkVehicleRequest) {
+        Optional<Vehicle> vehicleOptional = parkingLotRepository.findAndUnParkVehicle(
+            unParkVehicleRequest);
 
+        if (vehicleOptional.isPresent()) {
+            Vehicle vehicle = vehicleOptional.get();
+            System.out.printf("Unparked vehicle with Registration Number: %s and Color: %s%n",
+                vehicle.getRegistrationNo(), vehicle.getColor());
+        } else {
+            System.out.printf("Invalid Ticket%n");
+        }
     }
 }
